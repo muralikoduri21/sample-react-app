@@ -3,6 +3,13 @@ on:
     push:
         branches:
             - main
+
+permissions:                    
+  checks: write
+  contents: read
+  pull-requests: write
+  security-events: write
+  
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -25,3 +32,5 @@ jobs:
                 files: "**/test-results/results.xml"
                 comment_mode: always
               
+
+                
