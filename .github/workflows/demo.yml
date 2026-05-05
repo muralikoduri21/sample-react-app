@@ -1,0 +1,27 @@
+name: react js appl
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get the code
+              uses: actions/checkout@v4
+            - name: get dependencies
+              run: npm install
+            - name: codeql init
+              uses: github/codeql-action/init@v4
+            - name: build the code
+              run: npm run build
+            - name: test the code
+              run: npm run test:report
+            - name: codeql analyze
+              uses: github/codeql-action/analyze@v4
+            - name: publish
+              uses: EnricoMi/publish-unit-test-result-action@v2
+              with:
+                files: "**/test-results/results.xml"
+                comment_mode: always
+              
